@@ -1,0 +1,89 @@
+# Where-To-Buy mapping config (Excel/CSV → ht:wheretobuydocument)
+# Uses repository property names from ht namespace
+
+type: wheretobuy
+
+target:
+  # Fixed path for PoC. TODO: countrycode
+  jcrPath: /content/documents/wheretobuy
+  nodeType: ht:wheretobuydocument
+
+strategy:
+  default: replaceFolder
+  matchBy: shopname        # TODO: for updateById Strategy
+
+# Column to property mapping
+# sourceName = input column
+# targetProperty = JCR property (ht: prefix)
+# required = must not be empty
+# unique = must be unique in file
+# validate = optional named validator
+columns:
+
+  - sourceName: shopname
+    targetProperty: ht:name
+    validators:
+      - required
+
+  - sourceName: federation
+    targetProperty: ht:group
+
+  - sourceName: address
+    targetProperty: ht:address
+    # Source column and ht:address both contain street + house number.
+    # Not required: online-only shops legitimately omit a physical address.
+
+  - sourceName: city
+    targetProperty: ht:city
+    # Not required: see address — online-only shops have no city.
+
+  - sourceName: zipcode
+    targetProperty: ht:zipcode
+
+  - sourceName: phone
+    targetProperty: ht:phone
+
+  - sourceName: fax
+    targetProperty: ht:fax
+
+  - sourceName: email
+    targetProperty: ht:email
+    validators:
+    - email
+
+  - sourceName: website
+    targetProperty: ht:url
+    firstOccurrenceFlag: ht:hasUniqueUrl
+
+  - sourceName: onlineshopname
+    targetProperty: ht:onlineshopname
+
+  - sourceName: hasonlineshop
+    targetProperty: ht:hasOnlineShop
+
+  - sourceName: haslocalshop
+    targetProperty: ht:hasLocalShop
+
+  - sourceName: autocompletename
+    targetProperty: ht:autocompleteName
+    firstOccurrenceFlag: ht:hasUniqueAutocompletName
+
+  # Optional pre-geocoded coordinates from source data.
+  # If latitude and longitude are valid, geocoding is skipped to save API calls.
+  - sourceName: latitude
+    targetProperty: ht:googlemapslocationlat
+
+  - sourceName: longitude
+    targetProperty: ht:googlemapslocationlng
+
+# Enrichment rules executed after mapping. Results are written into target properties.
+enrichment:
+
+  - service: geocoding
+    sourceFields: [address, city, zipcode]
+    targetProperties:
+      latitude: ht:googlemapslocationlat
+      longitude: ht:googlemapslocationlng
+    onFailure: continueWithoutEnrichment
+    # Only geocode local shops — online-only entries have no physical address.
+    requiresProperty: ht:hasLocalShop
