@@ -36,7 +36,7 @@ class MappingServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		MappingConfig config = new ConfigLoader().load("wheretobuy-bloomreach");
+		MappingConfig config = new ConfigLoader().load("wheretobuy-sqlite");
 		service = new MappingService(config, List.of(
 			new RequiredValidator(),
 			new EmailValidator()
@@ -66,11 +66,10 @@ class MappingServiceTest {
 		MappedRecord result = mapped.record();
 
 		assertEquals(1, result.rowNumber());
-		assertEquals("ht:wheretobuydocument", result.nodeType());
 		assertEquals(17, result.properties().size());
-		assertEquals("Test Shop", result.properties().get("ht:name"));
-		assertEquals("Berlin", result.properties().get("ht:city"));
-		assertEquals("https://test.de", result.properties().get("ht:url"));
+		assertEquals("Test Shop", result.properties().get("name"));
+		assertEquals("Berlin", result.properties().get("city"));
+		assertEquals("https://test.de", result.properties().get("url"));
 	}
 
 	@Test

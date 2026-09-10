@@ -85,7 +85,7 @@ public class ConfiguredEnrichmentService implements EnrichmentService {
                 }
             }
         }
-        return Optional.of(new MappedRecord(record.rowNumber(), record.nodeType(), properties));
+        return Optional.of(new MappedRecord(record.rowNumber(), properties));
     }
 
 	/**
