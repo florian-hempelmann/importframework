@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mycompany.config.ConfigLoader;
 import org.mycompany.config.MappingConfig;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Basic ConfigLoader tests.
@@ -28,49 +25,34 @@ class ConfigLoaderTest {
 
     @Test
     void loadsWheretobuyConfigFromClasspath() {
-        MappingConfig config = loader.load("wheretobuy-bloomreach");
+        MappingConfig config = loader.load("wheretobuy-sqlite");
 
-        assertEquals("wheretobuy-bloomreach", config.type());
+        assertEquals("wheretobuy-sqlite", config.type());
         assertNotNull(config.target());
-        assertEquals("ht:wheretobuydocument", config.target().nodeType());
-        assertEquals("/content/documents/wheretobuy",
-                     config.target().jcrPath());
+        assertEquals("wheretobuy",
+                     config.target().table());
     }
 
     @Test
     void parsesStrategyAndRenamesDefaultKeyword() {
-        MappingConfig config = loader.load("wheretobuy-bloomreach");
+        MappingConfig config = loader.load("wheretobuy-sqlite");
 
 		// Verifies @JsonProperty("default") -> defaultStrategy mapping.
         assertEquals("replaceFolder", config.strategy().defaultStrategy());
-        assertEquals("shopname",      config.strategy().matchBy());
+        assertNull(config.strategy().matchBy());
     }
 
     @Test
     void parsesAllColumnMappings() {
-        MappingConfig config = loader.load("wheretobuy-bloomreach");
+        MappingConfig config = loader.load("wheretobuy-sqlite");
 
         assertEquals(15, config.columns().size());
 
         MappingConfig.ColumnMapping first = config.columns().get(0);
         assertEquals("shopname", first.sourceName());
-        assertEquals("ht:name",  first.targetProperty());
+        assertEquals("name",  first.targetProperty());
 		assertNotNull(first.validators());
 		assertTrue(first.validators().contains("required"));
-    }
-
-    @Test
-    void parsesEnrichmentAndOnFailureEnum() {
-        MappingConfig config = loader.load("wheretobuy-bloomreach");
-
-        assertEquals(1, config.enrichment().size());
-        MappingConfig.EnrichmentRule rule = config.enrichment().get(0);
-
-        assertEquals("geocoding", rule.service());
-        assertEquals(3, rule.sourceFields().size());
-		// Verifies enum mapping from YAML string.
-        assertEquals(MappingConfig.OnFailure.CONTINUE_WITHOUT_ENRICHMENT,
-                     rule.onFailure());
     }
 
     @Test

@@ -25,7 +25,7 @@ public record MappingConfig(
 	/**
 	 * JCR target path and document type. No country code.
 	 */
-    public record Target(String jcrPath, String nodeType) { }
+    public record Target(String table) { }
 
 	/**
 	 * Update strategy per import type.

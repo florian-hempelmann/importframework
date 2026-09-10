@@ -74,8 +74,7 @@ class UpdateStrategyTest {
     // --- Helpers ---------------------------------------------------------
 
     private static MappedRecord record(int rowNumber, String shopName) {
-        return new MappedRecord(rowNumber, "ht:wheretobuydocument",
-                Map.of("ht:name", shopName));
+        return new MappedRecord(rowNumber, Map.of("name", shopName));
     }
 
 	/** Simple in-memory CmsRepository stub for isolated tests. */
@@ -102,7 +101,7 @@ class UpdateStrategyTest {
 
         @Override
         public boolean exists(MappedRecord record) {
-            String name = (String) record.properties().get("ht:name");
+            String name = (String) record.properties().get("name");
             return existingNames.contains(name);
         }
     }

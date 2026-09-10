@@ -89,7 +89,6 @@ public class MappingService {
 
 		return new Mapped(new MappedRecord(
 			record.rowNumber(),
-			config.target().nodeType(),
 			properties));
 	}
 
