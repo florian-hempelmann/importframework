@@ -9,7 +9,7 @@ import org.mycompany.model.WriteResult;
  * No exceptions on write — failures are returned as WriteResult.
  * Used by update strategies for folder operations and existence checks.
  */
-public interface CmsRepository {
+public interface ImportRepository {
 
 	/**
 	 * Creates or updates a cms document.

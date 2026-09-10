@@ -2,7 +2,7 @@ package org.mycompany.strategy;
 
 import org.mycompany.model.MappedRecord;
 import org.mycompany.model.WriteResult;
-import org.mycompany.persistence.CmsRepository;
+import org.mycompany.persistence.ImportRepository;
 
 import java.util.stream.Stream;
 
@@ -18,5 +18,5 @@ public interface UpdateStrategy {
      * Strategy operating on a stream of MappedRecords and producing WriteResults.
 	 * Stream parsing and consumption are orchestrated by ImportService.java.
      */
-    Stream<WriteResult> apply(Stream<MappedRecord> records, CmsRepository repository);
+    Stream<WriteResult> apply(Stream<MappedRecord> records, ImportRepository repository);
 }

@@ -1,7 +1,7 @@
 # Where-To-Buy mapping config (Excel/CSV → ht:wheretobuydocument)
 # Uses repository property names from ht namespace
 
-type: wheretobuy
+type: wheretobuy-bloomreach
 
 target:
   # Fixed path for PoC. TODO: countrycode

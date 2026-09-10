@@ -2,12 +2,9 @@ package org.mycompany.strategy;
 
 import org.mycompany.model.MappedRecord;
 import org.mycompany.model.WriteResult;
-import org.mycompany.persistence.CmsRepository;
+import org.mycompany.persistence.ImportRepository;
 
 import org.junit.jupiter.api.Test;
-import org.mycompany.strategy.ReplaceFolderStrategy;
-import org.mycompany.strategy.UpdateByIdStrategy;
-import org.mycompany.strategy.UpdateStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -82,7 +79,7 @@ class UpdateStrategyTest {
     }
 
 	/** Simple in-memory CmsRepository stub for isolated tests. */
-    private static class StubRepository implements CmsRepository {
+    private static class StubRepository implements ImportRepository {
         final List<String> actionLog = new ArrayList<>();
         private final Set<String> existingNames = new HashSet<>();
         private final AtomicInteger pathCounter = new AtomicInteger(0);
