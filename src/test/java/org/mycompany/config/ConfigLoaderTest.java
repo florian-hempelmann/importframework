@@ -28,9 +28,9 @@ class ConfigLoaderTest {
 
     @Test
     void loadsWheretobuyConfigFromClasspath() {
-        MappingConfig config = loader.load("wheretobuy");
+        MappingConfig config = loader.load("wheretobuy-bloomreach");
 
-        assertEquals("wheretobuy", config.type());
+        assertEquals("wheretobuy-bloomreach", config.type());
         assertNotNull(config.target());
         assertEquals("ht:wheretobuydocument", config.target().nodeType());
         assertEquals("/content/documents/wheretobuy",
@@ -39,7 +39,7 @@ class ConfigLoaderTest {
 
     @Test
     void parsesStrategyAndRenamesDefaultKeyword() {
-        MappingConfig config = loader.load("wheretobuy");
+        MappingConfig config = loader.load("wheretobuy-bloomreach");
 
 		// Verifies @JsonProperty("default") -> defaultStrategy mapping.
         assertEquals("replaceFolder", config.strategy().defaultStrategy());
@@ -48,7 +48,7 @@ class ConfigLoaderTest {
 
     @Test
     void parsesAllColumnMappings() {
-        MappingConfig config = loader.load("wheretobuy");
+        MappingConfig config = loader.load("wheretobuy-bloomreach");
 
         assertEquals(15, config.columns().size());
 
@@ -61,7 +61,7 @@ class ConfigLoaderTest {
 
     @Test
     void parsesEnrichmentAndOnFailureEnum() {
-        MappingConfig config = loader.load("wheretobuy");
+        MappingConfig config = loader.load("wheretobuy-bloomreach");
 
         assertEquals(1, config.enrichment().size());
         MappingConfig.EnrichmentRule rule = config.enrichment().get(0);

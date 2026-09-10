@@ -13,11 +13,11 @@ import org.mycompany.model.Record;
 import org.mycompany.model.ValidationResult;
 import org.mycompany.parser.Parser;
 import org.mycompany.parser.ParserFactory;
-import org.mycompany.persistence.CmsRepository;
-import org.mycompany.persistence.JackrabbitRepositoryAdapter;
+import org.mycompany.persistence.ImportRepository;
+//import org.mycompany.persistence.JackrabbitRepositoryAdapter;
 import org.mycompany.strategy.UpdateStrategy;
 
-import javax.jcr.Session;
+//import javax.jcr.Session;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -63,14 +63,12 @@ public class ImportService {
 	 * @param type        Import type (drives YAML lookup, e.g. "wheretobuy")
 	 * @param filename    Source filename (determines parser by extension)
 	 * @param content     Input stream of the uploaded file
-	 * @param session     JCR session of the requesting user
 	 * @param executedBy  User identity used for audit logging in the report
 	 */
     public ImportReport runImport(
             String type,
             String filename,
             InputStream content,
-            Session session,
             String executedBy) {
 
         MappingConfig config = configLoader.load(type);
@@ -79,7 +77,7 @@ public class ImportService {
 
         MappingService mappingService = new MappingService(config, validators);
         EnrichmentService enrichmentService = new ConfiguredEnrichmentService(config, geocoder);
-        CmsRepository repository = new JackrabbitRepositoryAdapter(session, config);
+//        CmsRepository repository = new JackrabbitRepositoryAdapter(session, config);
 
         ImportReport.Builder report = ImportReport.builder(type, strategy.name(), executedBy);
 
@@ -99,7 +97,7 @@ public class ImportService {
             return report.build();
         }
 
-        applyStrategyAndCollectResults(strategy, enrichedRecords, repository, report);
+//        applyStrategyAndCollectResults(strategy, enrichedRecords, repository, report);
 
         return report.build();
     }
@@ -157,7 +155,7 @@ public class ImportService {
     private static void applyStrategyAndCollectResults(
             UpdateStrategy strategy,
             List<MappedRecord> validRecords,
-            CmsRepository repository,
+            ImportRepository repository,
             ImportReport.Builder report) {
 
         strategy.apply(validRecords.stream(), repository).forEach(writeResult -> {

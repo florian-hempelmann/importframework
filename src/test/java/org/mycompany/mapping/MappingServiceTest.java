@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Tests for mapping layer (spec 4.2.3, 4.7.3).
  *
- * Uses real wheretobuy.yaml config.
+ * Uses real wheretobuy-bloomreach.yaml config.
  * ConfigLoader is tested separately; here we test MappingService only.
  *
  * Validator list is empty: no external validators used.
@@ -36,7 +36,7 @@ class MappingServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		MappingConfig config = new ConfigLoader().load("wheretobuy");
+		MappingConfig config = new ConfigLoader().load("wheretobuy-bloomreach");
 		service = new MappingService(config, List.of(
 			new RequiredValidator(),
 			new EmailValidator()
