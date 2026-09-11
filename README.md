@@ -197,6 +197,8 @@ src/main/java/org/mycompany
 ## Project Background
 
 This project was originally developed by me during my vocational retraining in software development.
+You can find my initial architecture design from May 2026, along with my thoughts on it, visualized 
+in the ./architecture-UML-german folder (made by draw.io). 
 
 It started as an import framework for a Bloomreach Enterprise application and was delivered as a Maven submodule 
 integrated into the Bloomreach lifecycle. From the beginning, I focused on keeping the core import logic as independent 
