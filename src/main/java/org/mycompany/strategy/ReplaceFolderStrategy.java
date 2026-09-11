@@ -3,6 +3,7 @@ package org.mycompany.strategy;
 import org.mycompany.model.MappedRecord;
 import org.mycompany.model.WriteResult;
 import org.mycompany.persistence.ImportRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Stream;
 
@@ -11,6 +12,8 @@ import java.util.stream.Stream;
  * Used when source represents the complete desired state.
  * Writes are committed per record after initial table/folder clear.
  */
+
+@Component
 public class ReplaceFolderStrategy implements UpdateStrategy {
 
     @Override

@@ -15,12 +15,14 @@ import org.mycompany.parser.Parser;
 import org.mycompany.parser.ParserFactory;
 import org.mycompany.persistence.ImportRepository;
 import org.mycompany.strategy.UpdateStrategy;
+import org.springframework.stereotype.Service;
 
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,6 +32,8 @@ import java.util.stream.Stream;
  *
  * Per-run dependencies: MappingService and EnrichmentService.
  */
+
+@Service
 public class ImportService {
 
     private final ConfigLoader configLoader;
@@ -44,7 +48,7 @@ public class ImportService {
             ParserFactory parserFactory,
             List<Validator> validators,
             List<UpdateStrategy> strategies,
-            GeocodingService geocoder,
+            Optional<GeocodingService> geocoder,
             ImportRepository repository) {
 
         this.configLoader = configLoader;
@@ -57,7 +61,7 @@ public class ImportService {
                         s -> s
                 ));
 
-        this.geocoder = geocoder;
+        this.geocoder = geocoder.orElse(null);;
         this.repository = repository;
     }
 
