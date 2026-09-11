@@ -166,6 +166,13 @@ The project contains tests for:
 * unsupported file extensions
 * empty uploads
 
+### You can test the import and receiving json report manually with:
+```bash
+curl -X POST   
+-F "file=@src/main/resources/samples/wheretobuy.xlsx"   
+http://localhost:8080/api/imports/wheretobuy-sqlite
+```
+
 ## Project Structure
 
 ```text
