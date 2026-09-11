@@ -1,12 +1,15 @@
 package org.mycompany.mapping;
 
 import org.mycompany.model.ValidationFailure;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 /**
  * Required field validation.
  */
+
+@Component
 public class RequiredValidator implements Validator {
 
 	@Override

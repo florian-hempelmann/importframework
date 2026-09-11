@@ -3,13 +3,13 @@ package org.mycompany.model;
 /**
  * Write result for one record (success or failure).
  */
-public record WriteResult(int rowNumber, String nodePath, String error) {
+public record WriteResult(int rowNumber, String recordReference, String error) {
 
-	public static WriteResult success(int rowNumber, String nodePath) {
-		if (nodePath == null || nodePath.isBlank()) {
-			throw new IllegalArgumentException("success() needs a nodePath");
+	public static WriteResult success(int rowNumber, String recordReference) {
+		if (recordReference == null || recordReference.isBlank()) {
+			throw new IllegalArgumentException("success() needs a recordReference");
 		}
-		return new WriteResult(rowNumber, nodePath, null);
+		return new WriteResult(rowNumber, recordReference, null);
 	}
 	public static WriteResult failure(int rowNumber, String error) {
 		if (error == null || error.isBlank()) {
