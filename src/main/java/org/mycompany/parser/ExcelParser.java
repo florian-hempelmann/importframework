@@ -3,6 +3,7 @@ package org.mycompany.parser;
 import org.mycompany.model.Record;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +24,8 @@ import java.util.stream.StreamSupport;
  * - Workbook is isolated per request (no shared state)
  * - Stream is closed via Stream.onClose()
  */
+
+@Component
 public class ExcelParser implements Parser {
 
 	// prevents ZIP bomb / decompression attacks

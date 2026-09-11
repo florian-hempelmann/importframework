@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,7 +62,7 @@ class ImportServiceTest {
                 parserFactory,
                 validators,
                 strategies,
-                null,
+                Optional.empty(),
                 repository
         );
 
@@ -124,7 +125,7 @@ class ImportServiceTest {
                 parserFactory,
                 validators,
                 strategies,
-                null,
+                Optional.empty(),
                 repository
         );
 
@@ -201,7 +202,7 @@ class ImportServiceTest {
                 parserFactory,
                 validators,
                 strategies,
-                null,
+                Optional.empty(),
                 repository
         );
 

@@ -1,5 +1,7 @@
 package org.mycompany.parser;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,8 @@ import java.util.List;
  * New parsers are picked up automatically if registered as beans and
  * if supports(...) returns true.
  */
+
+@Component
 public class ParserFactory {
 
     private final List<Parser> parsers;

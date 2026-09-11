@@ -1,6 +1,7 @@
 package org.mycompany.mapping;
 
 import org.mycompany.model.ValidationFailure;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
@@ -9,6 +10,8 @@ import java.util.Optional;
  * Checks that the value is a decimal in range -180..180.
  * Empty values are allowed (handled by RequiredValidator).
  */
+
+@Component
 public class LatLonValidator implements Validator {
 
     private static final double MIN = -180.0;
