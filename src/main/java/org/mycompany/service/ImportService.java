@@ -64,7 +64,7 @@ public class ImportService {
 	/**
 	 * Executes a full import run.
 	 *
-	 * @param type        Import type (drives YAML lookup, e.g. "wheretobuy")
+	 * @param type        Import type (drives YAML lookup, e.g. "wheretobuy-sqlite")
 	 * @param filename    Source filename (determines parser by extension)
 	 * @param content     Input stream of the uploaded file
 	 * @param executedBy  User identity used for audit logging in the report
@@ -88,8 +88,6 @@ public class ImportService {
                 parseAndValidate(parser, content, mappingService, report);
 
         if (validRecords.isEmpty()) {
-			// Records that passed mapping and validation successfully.
-			// Only these are passed to enrichment and persistence.
             return report.build();
         }
 
