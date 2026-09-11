@@ -14,10 +14,8 @@ import org.mycompany.model.ValidationResult;
 import org.mycompany.parser.Parser;
 import org.mycompany.parser.ParserFactory;
 import org.mycompany.persistence.ImportRepository;
-//import org.mycompany.persistence.JackrabbitRepositoryAdapter;
 import org.mycompany.strategy.UpdateStrategy;
 
-//import javax.jcr.Session;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -27,11 +25,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Orchestrates the import pipeline: Parser → Mapping → Strategy → Persistence.
- * Produces an ImportReport per run.
+ * Long-lived dependencies: ConfigLoader, ParserFactory, validators,
+ * strategies, geocoder and repository.
  *
- * Long-lived dependencies: ConfigLoader, ParserFactory, validators, strategies.
- * Per-run dependencies: MappingService, CmsRepository, JCR Session.
+ * Per-run dependencies: MappingService and EnrichmentService.
  */
 public class ImportService {
 
@@ -40,21 +37,28 @@ public class ImportService {
     private final List<Validator> validators;
     private final Map<String, UpdateStrategy> strategyRegistry;
     private final GeocodingService geocoder;
+    private final ImportRepository repository;
 
     public ImportService(
             ConfigLoader configLoader,
             ParserFactory parserFactory,
             List<Validator> validators,
             List<UpdateStrategy> strategies,
-            GeocodingService geocoder) {
+            GeocodingService geocoder,
+            ImportRepository repository) {
+
         this.configLoader = configLoader;
         this.parserFactory = parserFactory;
         this.validators = List.copyOf(validators);
+
         this.strategyRegistry = strategies.stream()
-                .collect(Collectors.toUnmodifiableMap(UpdateStrategy::name, s -> s));
-        // geocoder may be null when no API key is configured; enrichment then
-        // either skips (CONTINUE_WITHOUT_ENRICHMENT) or fails per its OnFailure setting.
+                .collect(Collectors.toUnmodifiableMap(
+                        UpdateStrategy::name,
+                        s -> s
+                ));
+
         this.geocoder = geocoder;
+        this.repository = repository;
     }
 
 	/**
@@ -77,7 +81,6 @@ public class ImportService {
 
         MappingService mappingService = new MappingService(config, validators);
         EnrichmentService enrichmentService = new ConfiguredEnrichmentService(config, geocoder);
-//        CmsRepository repository = new JackrabbitRepositoryAdapter(session, config);
 
         ImportReport.Builder report = ImportReport.builder(type, strategy.name(), executedBy);
 
@@ -97,7 +100,7 @@ public class ImportService {
             return report.build();
         }
 
-//        applyStrategyAndCollectResults(strategy, enrichedRecords, repository, report);
+        applyStrategyAndCollectResults(strategy, enrichedRecords, repository, report);
 
         return report.build();
     }
