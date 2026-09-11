@@ -22,9 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests for mapping layer (spec 4.2.3, 4.7.3).
+ * Tests for mapping layer.
  *
- * Uses real wheretobuy.yaml config.
+ * Uses wheretobuy-sqlite.yaml config.
  * ConfigLoader is tested separately; here we test MappingService only.
  *
  * Validator list is empty: no external validators used.
@@ -36,7 +36,7 @@ class MappingServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		MappingConfig config = new ConfigLoader().load("wheretobuy");
+		MappingConfig config = new ConfigLoader().load("wheretobuy-sqlite");
 		service = new MappingService(config, List.of(
 			new RequiredValidator(),
 			new EmailValidator()
@@ -66,11 +66,10 @@ class MappingServiceTest {
 		MappedRecord result = mapped.record();
 
 		assertEquals(1, result.rowNumber());
-		assertEquals("ht:wheretobuydocument", result.nodeType());
 		assertEquals(17, result.properties().size());
-		assertEquals("Test Shop", result.properties().get("ht:name"));
-		assertEquals("Berlin", result.properties().get("ht:city"));
-		assertEquals("https://test.de", result.properties().get("ht:url"));
+		assertEquals("Test Shop", result.properties().get("name"));
+		assertEquals("Berlin", result.properties().get("city"));
+		assertEquals("https://test.de", result.properties().get("url"));
 	}
 
 	@Test
@@ -118,7 +117,7 @@ class MappingServiceTest {
 
 	private static Record recordWith(String... keyValuePairs) {
 		if (keyValuePairs.length % 2 != 0) {
-			throw new IllegalArgumentException("Brauche paare aus key/value");
+			throw new IllegalArgumentException("Needs pairs of key/value");
 		}
 		Map<String, String> fields = new LinkedHashMap<>();
 		for (int i = 0; i < keyValuePairs.length; i += 2) {

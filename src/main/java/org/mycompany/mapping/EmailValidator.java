@@ -29,7 +29,7 @@ public class EmailValidator implements Validator {
 
 		if (!EMAIL_PATTERN.matcher(value).matches()) {
 			return Optional.of(new ValidationFailure(columnName,
-					name(),"'" + value + "' ist keine gültige E-Mail-Adresse")
+					name(),"'" + value + "' is not a valid email")
 			);
 		}
 

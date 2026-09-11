@@ -77,7 +77,7 @@
 //
 //		RepositoryJaxrsService.addEndpoint(endpoint);
 //
-//        log.info("Import-Endpoints registriert unter /cms/ws/imports/* (POST /{type}, GET /{type}/sample)");
+//        log.info("Import endpoints are registrated in /cms/ws/imports/* (POST /{type}, GET /{type}/sample)");
 //    }
 //
 //    @Override
