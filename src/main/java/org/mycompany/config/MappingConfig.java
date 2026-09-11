@@ -22,9 +22,6 @@ public record MappingConfig(
         enrichment = enrichment == null ? List.of() : List.copyOf(enrichment);
     }
 
-	/**
-	 * JCR target path and document type. No country code.
-	 */
     public record Target(String table) { }
 
 	/**
@@ -48,8 +45,10 @@ public record MappingConfig(
 
 	/**
 	 * Enrichment rule for an external service.
+	 *
+	 * Yaml:
 	 * sourceFields: input columns
-	 * targetProperties: service result → JCR mapping
+	 * targetProperties: service result → mapping
 	 * onFailure: behavior if enrichment fails
 	 * requiresProperty: optional JCR property name — rule only applies
 	 *                   when this property is truthy (Boolean.TRUE, "true", "x").

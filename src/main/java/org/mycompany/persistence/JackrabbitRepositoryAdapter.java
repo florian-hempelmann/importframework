@@ -47,7 +47,7 @@
 //            String folderPath = config.target().jcrPath();
 //            if (!session.nodeExists(folderPath)) {
 //                return WriteResult.failure(record.rowNumber(),
-//                        "Zielordner existiert nicht: " + folderPath);
+//                        "Target folder does not exist: " + folderPath);
 //            }
 //
 //            Node folderNode = session.getNode(folderPath);
@@ -75,7 +75,7 @@
 //        String folderPath = config.target().jcrPath();
 //        try {
 //            if (!session.nodeExists(folderPath)) {
-//                throw new IllegalStateException("Zielordner existiert nicht: " + folderPath);
+//                throw new IllegalStateException("Target folder does not exist: " + folderPath);
 //            }
 //            Node folderNode = session.getNode(folderPath);
 //            List<String> childNames = new ArrayList<>();
@@ -93,7 +93,7 @@
 //        } catch (RepositoryException e) {
 //            discardPendingChanges();
 //            throw new IllegalStateException(
-//                    "Konnte Zielordner '" + folderPath + "' nicht leeren", e);
+//                    "Could not empty target folder: '" + folderPath, e);
 //        }
 //    }
 //
@@ -149,7 +149,7 @@
 //            }
 //        }
 //        throw new IllegalStateException(
-//                "matchBy-Spalte '" + matchBySource + "' nicht in columns gefunden");
+//                "matchBy-column '" + matchBySource + "' not found");
 //    }
 //
 //    // --- Names ----------------------------------------------------

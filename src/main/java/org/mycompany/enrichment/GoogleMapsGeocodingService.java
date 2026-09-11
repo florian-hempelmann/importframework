@@ -19,6 +19,8 @@ import java.util.Map;
  * Google Maps Geocoding API implementation.
  * Sends URL-encoded GET requests to the public API.
  * API key is provided via constructor injection.
+ *
+ * API Key currently not provided -> enrichment won't be used for now.
  */
 public class GoogleMapsGeocodingService implements GeocodingService {
 

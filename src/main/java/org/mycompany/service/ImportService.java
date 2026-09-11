@@ -112,7 +112,7 @@ public class ImportService {
         UpdateStrategy strategy = strategyRegistry.get(name);
         if (strategy == null) {
             throw new IllegalStateException(
-                    "Unbekannte Strategy '" + name + "'. Registriert sind: "
+                    "Unknown strategy '" + name + "'. Registrated are: "
                             + strategyRegistry.keySet());
         }
         return strategy;

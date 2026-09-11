@@ -22,9 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests for mapping layer (spec 4.2.3, 4.7.3).
+ * Tests for mapping layer.
  *
- * Uses real wheretobuy-bloomreach.yaml config.
+ * Uses wheretobuy-sqlite.yaml config.
  * ConfigLoader is tested separately; here we test MappingService only.
  *
  * Validator list is empty: no external validators used.
@@ -117,7 +117,7 @@ class MappingServiceTest {
 
 	private static Record recordWith(String... keyValuePairs) {
 		if (keyValuePairs.length % 2 != 0) {
-			throw new IllegalArgumentException("Brauche paare aus key/value");
+			throw new IllegalArgumentException("Needs pairs of key/value");
 		}
 		Map<String, String> fields = new LinkedHashMap<>();
 		for (int i = 0; i < keyValuePairs.length; i += 2) {
