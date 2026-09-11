@@ -19,7 +19,7 @@ public record ValidationResult(int rowNumber, List<ValidationFailure> failures) 
 
     public static ValidationResult invalid(int rowNumber, List<ValidationFailure> failures) {
         if (failures.isEmpty()) {
-            throw new IllegalArgumentException("invalid() braucht mindestens eine Failure");
+            throw new IllegalArgumentException("invalid() needs at least one failure");
         }
         return new ValidationResult(rowNumber, failures);
     }

@@ -2,12 +2,9 @@ package org.mycompany.strategy;
 
 import org.mycompany.model.MappedRecord;
 import org.mycompany.model.WriteResult;
-import org.mycompany.persistence.CmsRepository;
+import org.mycompany.persistence.ImportRepository;
 
 import org.junit.jupiter.api.Test;
-import org.mycompany.strategy.ReplaceFolderStrategy;
-import org.mycompany.strategy.UpdateByIdStrategy;
-import org.mycompany.strategy.UpdateStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -60,7 +57,7 @@ class UpdateStrategyTest {
 
 		// Existing record rejected (A)
         assertFalse(results.get(0).isSuccess());
-        assertTrue(results.get(0).error().contains("existiert bereits"));
+        assertTrue(results.get(0).error().contains("already exists"));
 
 		// New record written once (B)
         assertTrue(results.get(1).isSuccess());
@@ -77,12 +74,11 @@ class UpdateStrategyTest {
     // --- Helpers ---------------------------------------------------------
 
     private static MappedRecord record(int rowNumber, String shopName) {
-        return new MappedRecord(rowNumber, "ht:wheretobuydocument",
-                Map.of("ht:name", shopName));
+        return new MappedRecord(rowNumber, Map.of("name", shopName));
     }
 
 	/** Simple in-memory CmsRepository stub for isolated tests. */
-    private static class StubRepository implements CmsRepository {
+    private static class StubRepository implements ImportRepository {
         final List<String> actionLog = new ArrayList<>();
         private final Set<String> existingNames = new HashSet<>();
         private final AtomicInteger pathCounter = new AtomicInteger(0);
@@ -105,7 +101,7 @@ class UpdateStrategyTest {
 
         @Override
         public boolean exists(MappedRecord record) {
-            String name = (String) record.properties().get("ht:name");
+            String name = (String) record.properties().get("name");
             return existingNames.contains(name);
         }
     }

@@ -1,0 +1,60 @@
+type: wheretobuy-sqlite
+
+target:
+  table: wheretobuy
+
+strategy:
+  default: replaceFolder
+
+columns:
+
+  - sourceName: shopname
+    targetProperty: name
+    validators:
+      - required
+
+  - sourceName: federation
+    targetProperty: group
+
+  - sourceName: address
+    targetProperty: address
+
+  - sourceName: city
+    targetProperty: city
+
+  - sourceName: zipcode
+    targetProperty: zipcode
+
+  - sourceName: phone
+    targetProperty: phone
+
+  - sourceName: fax
+    targetProperty: fax
+
+  - sourceName: email
+    targetProperty: email
+    validators:
+      - email
+
+  - sourceName: website
+    targetProperty: url
+    firstOccurrenceFlag: hasUniqueUrl
+
+  - sourceName: onlineshopname
+    targetProperty: onlineshopname
+
+  - sourceName: hasonlineshop
+    targetProperty: hasOnlineShop
+
+  - sourceName: haslocalshop
+    targetProperty: hasLocalShop
+
+  - sourceName: autocompletename
+    targetProperty: autocompleteName
+    firstOccurrenceFlag: hasUniqueAutocompleteName
+
+  - sourceName: latitude
+    targetProperty: latitude
+
+  - sourceName: longitude
+    targetProperty: longitude

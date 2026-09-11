@@ -4,25 +4,24 @@ import org.mycompany.model.MappedRecord;
 import org.mycompany.model.WriteResult;
 
 /**
- * Persistence port (CMS-agnostic).
- * Implementations map to the concrete CMS (e.g. JCR adapter).
+ * Persistence port (originally CMS-agnostic, now SQLite is used).
  * No exceptions on write — failures are returned as WriteResult.
  * Used by update strategies for folder operations and existence checks.
  */
-public interface CmsRepository {
+public interface ImportRepository {
 
 	/**
-	 * Creates or updates a cms document.
+	 * Creates or updates a target table record (originally a cms document).
 	 */
     WriteResult write(MappedRecord record);
 
 	/**
-	 * Clears all documents in target folder (replace mode).
+	 * Clears all target table values - originally: documents in target folder (replace mode).
 	 */
     void clearTargetFolder();
 
 	/**
-	 * Checks if a matching document already exists.
+	 * Checks if a matching table (originally: document) already exists.
 	 */
     boolean exists(MappedRecord record);
 }

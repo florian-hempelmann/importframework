@@ -67,7 +67,7 @@ public class MappingService {
 				}
 			}
 
-			// 2. only map valid data (unchanged logic, but now correct)
+			// 2. only map valid data
 			if (!fieldHasError) {
 				properties.put(column.targetProperty(), value);
 
@@ -89,7 +89,6 @@ public class MappingService {
 
 		return new Mapped(new MappedRecord(
 			record.rowNumber(),
-			config.target().nodeType(),
 			properties));
 	}
 

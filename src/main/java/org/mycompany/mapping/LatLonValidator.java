@@ -28,12 +28,12 @@ public class LatLonValidator implements Validator {
             double d = Double.parseDouble(value);
             if (d < MIN || d > MAX) {
                 return Optional.of(new ValidationFailure(columnName, name(),
-                        "Wert " + value + " außerhalb " + MIN + ".." + MAX));
+                        "Value: " + value + " not in: " + MIN + ".." + MAX));
             }
             return Optional.empty();
         } catch (NumberFormatException e) {
             return Optional.of(new ValidationFailure(columnName, name(),
-                    "'" + value + "' ist keine gültige Dezimalzahl"));
+                    "'" + value + "' is not a valid decimal number"));
         }
     }
 }
