@@ -180,7 +180,6 @@ src/main/java/org/mycompany
 ├── api/
  ├── ImportController.java          #after migration
  └── ImportExceptionHandler.java    #after migration
-├── api-bloomreach-old/             #commented out classes regarding bloomreach
 ├── config/
 ├── enrichment/
 ├── mapping/
@@ -188,7 +187,6 @@ src/main/java/org/mycompany
 ├── parser/
 ├── persistence/
   └── SqliteImportRepository.java   #after migration
-├── security-bloomreach-old/        #commented out classes regarding bloomreach
 ├── service/
 ├── strategy/
 └── ImportFrameworkApplication.java #after migration
