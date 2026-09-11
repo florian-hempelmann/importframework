@@ -21,7 +21,7 @@ public class ParserFactory {
                 .filter(p -> p.supports(filename))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Kein Parser fuer Datei '" + filename
-                                + "'. Unterstuetzt sind: .xlsx, .xls"));
+                        "No parser found for file '" + filename
+                                + "'. Supported extensions: .xlsx, .xls"));
     }
 }
