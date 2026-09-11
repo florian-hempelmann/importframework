@@ -57,7 +57,7 @@ class UpdateStrategyTest {
 
 		// Existing record rejected (A)
         assertFalse(results.get(0).isSuccess());
-        assertTrue(results.get(0).error().contains("existiert bereits"));
+        assertTrue(results.get(0).error().contains("already exists"));
 
 		// New record written once (B)
         assertTrue(results.get(1).isSuccess());

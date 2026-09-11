@@ -4,13 +4,13 @@
 type: wheretobuy-bloomreach
 
 target:
-  # Fixed path for PoC. TODO: countrycode
+  # Fixed path for PoC. TODO OLD - for Bloomreach: countrycode
   jcrPath: /content/documents/wheretobuy
   nodeType: ht:wheretobuydocument
 
 strategy:
   default: replaceFolder
-  matchBy: shopname        # TODO: for updateById Strategy
+  matchBy: shopname        # TODO OLD - for Bloomreach: using matchBy for updateById Strategy implementation
 
 # Column to property mapping
 # sourceName = input column

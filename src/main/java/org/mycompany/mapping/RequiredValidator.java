@@ -21,7 +21,7 @@ public class RequiredValidator implements Validator {
 	) {
 		if (value == null || value.isBlank()) {
 			return Optional.of(new ValidationFailure(columnName,
-					name(), "Pflichtfeld fehlt")
+					name(), "Required field missing.")
 			);
 		}
 		return Optional.empty();

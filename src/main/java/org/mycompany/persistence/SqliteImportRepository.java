@@ -78,7 +78,7 @@ public class SqliteImportRepository implements ImportRepository {
 
     @Override
     public boolean exists(MappedRecord record) {
-        // Wird für replaceFolder aktuell nicht benötigt.
+        // for replacefolder not relevant.
         return false;
     }
 }

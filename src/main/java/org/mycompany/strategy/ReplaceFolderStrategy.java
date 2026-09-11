@@ -7,9 +7,9 @@ import org.mycompany.persistence.ImportRepository;
 import java.util.stream.Stream;
 
 /**
- * Full replace mode: clears target folder, then writes all records.
+ * Full replace mode: clears target table/folder, then writes all records.
  * Used when source represents the complete desired state.
- * Writes are committed per record after initial folder clear.
+ * Writes are committed per record after initial table/folder clear.
  */
 public class ReplaceFolderStrategy implements UpdateStrategy {
 

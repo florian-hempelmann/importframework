@@ -20,14 +20,14 @@ public class ConfigLoader {
         try (InputStream is = getClass().getResourceAsStream(resourcePath)) {
             if (is == null) {
                 throw new IllegalArgumentException(
-                        "Keine Mapping-Konfiguration für Importtyp '" + type + "' gefunden "
-                                + "(erwartet unter " + resourcePath + ")");
+                        "No mapping configuration for import type: '" + type + "' found "
+                                + "(,expected in " + resourcePath + ")");
             }
             return yamlMapper.readValue(is, MappingConfig.class);
 
         } catch (IOException e) {
             throw new IllegalStateException(
-                    "Fehler beim Lesen der Mapping-Konfiguration für Importtyp '" + type + "'", e);
+                    "Error while reading the mapping configuration for import type '" + type + "'", e);
         }
     }
 }
